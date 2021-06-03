@@ -10,11 +10,11 @@ import { player } from './db';
 
   let localPlayer: PlayerInterface;
 
-  let humanReadbaleNumber = '0';
+  let betterCookieCounter = '0';
 
   PlayerStore.subscribe((newPlayer) => {
     localPlayer = newPlayer;
-    humanReadbaleNumber = convertNumber(localPlayer.cookies);
+    betterCookieCounter = convertNumber(localPlayer.cookies);
   });
   let localShop: ShopInterface;
   ShopStore.subscribe((newShop) => (localShop = newShop));
@@ -26,12 +26,12 @@ import { player } from './db';
   setInterval(autoBake, 1000);
 
   // @ts-ignore
-  window.__test__set_cookie = (cookies) =>
-    PlayerStore.update((a) => ({ ...a, cookies }));
+  // window.__test__set_cookie = (cookies) =>
+  //   PlayerStore.update((a) => ({ ...a, cookies }));
 </script>
 
 <svelte:head>
-  <title>{Math.floor(localPlayer.cookies)} Cookies</title>
+  <title>{betterCookieCounter} Cookies</title>
 </svelte:head>
 <main>
   <div id="owo">
@@ -39,7 +39,7 @@ import { player } from './db';
       <span>Multiplier: {localPlayer.multiplier}</span>
       <SetMulti />
       {#if localPlayer}
-        <h1 id="cookie">{humanReadbaleNumber} Cookies</h1>
+        <h1 id="cookie">{betterCookieCounter} Cookies</h1>
       {/if}
       <h2>
         {Math.round(localPlayer.perSecCookie * localPlayer.multiplier * 1000) /
