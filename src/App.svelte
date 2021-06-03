@@ -4,16 +4,15 @@
   import ShopList from './ui/shop.svelte';
   import { PlayerStore, ShopStore } from './stores/stores';
   import type { ShopInterface } from './interface/ShopObject';
-  import { player } from './db';
   import SetMulti from './SetMulti.svelte';
 import { convertNumber } from './utils';
+import { player } from './db';
 
   let localPlayer: PlayerInterface;
 
   let humanReadbaleNumber = '0';
 
   PlayerStore.subscribe((newPlayer) => {
-    console.log('dude get trigger');
     localPlayer = newPlayer;
     humanReadbaleNumber = convertNumber(localPlayer.cookies);
   });
@@ -21,8 +20,8 @@ import { convertNumber } from './utils';
   ShopStore.subscribe((newShop) => (localShop = newShop));
 
   function autoBake() {
-    // player.cookies = player.cookies + player.perSecCookie * player.multiplier;
-    // PlayerStore.set(player);
+    player.cookies = player.cookies + player.perSecCookie * player.multiplier;
+    PlayerStore.set(player);
   }
   setInterval(autoBake, 1000);
 
