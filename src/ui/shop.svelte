@@ -8,7 +8,7 @@
     UpgradeItem,
   } from '../interface/ShopObject';
   import { PlayerStore, ShopStore } from '../stores/stores';
-  import { convertNumber } from '../utils';
+  import { convertNumber, saveShopStatus } from '../utils';
 
   export let shop: ShopInterface;
   const shopCatagories = Object.keys(shop);
@@ -55,6 +55,7 @@
         }
         break;
     }
+    saveShopStatus(shop);
   }
   function updateClickAddon() {
     player.clickAddon = player.perSecCookie * player.clickCPS;

@@ -1,3 +1,6 @@
+import type PlayerInterface from "./interface/PlayerStat";
+import type { ShopInterface } from "./interface/ShopObject";
+
 export function convertNumber(cookie: number) {
     if (cookie >= 1000000000000000000000000000000000000000000000000000000000000000) return String(Math.round(cookie / 10000000000000000000000000000000000000000000000000000000000000) / 100 + 'Vig');
     if (cookie >= 1000000000000000000000000000000000000000000000000000000000000) return String(Math.round(cookie / 10000000000000000000000000000000000000000000000000000000000) / 100 + 'NovDec');
@@ -22,3 +25,12 @@ export function convertNumber(cookie: number) {
     if (cookie >= 1000) return String(Math.round(cookie / 10) / 100 + 'k');
     if (cookie < 1000) return String(Math.round(cookie * 10) / 10);
   }
+
+export function savePlayerStats(playSnapshot: PlayerInterface) {
+  const playerStatsString = JSON.stringify(playSnapshot);
+  localStorage.setItem('player', playerStatsString);
+}
+export function saveShopStatus(shopSnapshot: ShopInterface) {
+  const shopStatusString = JSON.stringify(shopSnapshot);
+  localStorage.setItem('shop', shopStatusString)
+}

@@ -1,14 +1,18 @@
 <script lang="ts">
   import type PlayerInterface from './interface/PlayerStat';
   import { PlayerStore } from './stores/stores';
-
+  import _ from 'lodash';
+  import { savePlayerStats } from './utils';
   export let player: PlayerInterface;
+  
+  const debouncedSavePlayerStats = _.debounce(savePlayerStats, 1000);
 
   function bake() {
-    const newCookieCount =
-      player.cookies + (player.perClickCookie + player.clickAddon) * player.multiplier;
+    const newCookieCount = player.cookies + (player.perClickCookie + player.clickAddon) * player.multiplier;
     player.cookies = newCookieCount;
+    player.clicked++
     PlayerStore.set(player);
+    debouncedSavePlayerStats(player);
   }
 </script>
 

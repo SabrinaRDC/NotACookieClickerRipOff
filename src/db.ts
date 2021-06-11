@@ -1,8 +1,9 @@
 import type PlayerInterface from "./interface/PlayerStat";
 import type {ShopInterface, UpgradsType, GeneratorType} from "./interface/ShopObject";
+import { savePlayerStats, saveShopStatus } from "./utils";
 
 
-export const player: PlayerInterface = {
+const playerDefault: PlayerInterface = Object.freeze({
     cookies: 0,
     clicked: 0,
     perSecCookie: 0,
@@ -10,9 +11,9 @@ export const player: PlayerInterface = {
     clickAddon: 0,
     clickCPS: 0,
     multiplier: 1,
-};
+});
 
-export const shop: ShopInterface = {
+const shopDefault: ShopInterface = Object.freeze({
     upgrades: [
         {
             price: 100,
@@ -255,4 +256,13 @@ export const shop: ShopInterface = {
             itemType: 'generator',
         },
     ],
-}
+});
+
+const savedPlayerString = localStorage.getItem('player');
+const savedShopString = localStorage.getItem('shop');
+
+const outputPlayer: PlayerInterface = savedPlayerString ? JSON.parse(savedPlayerString) : playerDefault;
+const outputShop: ShopInterface = savedShopString ? JSON.parse(savedShopString) : shopDefault;
+
+export const player = Object.assign({}, outputPlayer);
+export const shop = Object.assign({}, outputShop);

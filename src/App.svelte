@@ -5,8 +5,8 @@
   import { PlayerStore, ShopStore } from './stores/stores';
   import type { ShopInterface } from './interface/ShopObject';
   import SetMulti from './SetMulti.svelte';
-import { convertNumber } from './utils';
-import { player } from './db';
+  import { convertNumber, savePlayerStats } from './utils';
+  import { player } from './db';
 
   let localPlayer: PlayerInterface;
 
@@ -22,6 +22,7 @@ import { player } from './db';
   function autoBake() {
     player.cookies = player.cookies + player.perSecCookie * player.multiplier;
     PlayerStore.set(player);
+    savePlayerStats(player);
   }
   setInterval(autoBake, 1000);
 
