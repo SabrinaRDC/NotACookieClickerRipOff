@@ -1,21 +1,25 @@
 <script lang="ts">
   import type PlayerInterface from './interface/PlayerStat';
-  import CookieButton from './CookieButton.svelte';
+  import CookieButton from './ui/CookieButton.svelte';
   import ShopList from './ui/shop.svelte';
   import { PlayerStore, ShopStore } from './stores/stores';
   import type { ShopInterface } from './interface/ShopObject';
-  import SetMulti from './SetMulti.svelte';
+  import SetMulti from './ui/SetMulti.svelte';
   import { convertNumber, savePlayerStats } from './utils';
   import { player } from './db';
+  import ResetGameButton from './ui/ResetGameButton.svelte';
 
-  let localPlayer: PlayerInterface;
-
+  const AUTO_BAKE_TIME = 1000;
   let betterCookieCounter = '0';
-
-  PlayerStore.subscribe((newPlayer) => {
+  
+  function updatePlayerState(newPlayer: PlayerInterface) {
     localPlayer = newPlayer;
     betterCookieCounter = convertNumber(localPlayer.cookies);
-  });
+  }
+  
+  let localPlayer: PlayerInterface;
+  PlayerStore.subscribe((newPlayer) => updatePlayerState(newPlayer));
+  
   let localShop: ShopInterface;
   ShopStore.subscribe((newShop) => (localShop = newShop));
 
@@ -24,11 +28,8 @@
     PlayerStore.set(player);
     savePlayerStats(player);
   }
-  setInterval(autoBake, 1000);
-
-  // @ts-ignore
-  // window.__test__set_cookie = (cookies) =>
-  //   PlayerStore.update((a) => ({ ...a, cookies }));
+  setInterval(autoBake, AUTO_BAKE_TIME);
+  
 </script>
 
 <svelte:head>
@@ -37,8 +38,8 @@
 <main>
   <div id="owo">
     {#if localPlayer}
-      <span>Multiplier: {localPlayer.multiplier}</span>
       <SetMulti />
+      <ResetGameButton />
       {#if localPlayer}
         <h1 id="cookie">{betterCookieCounter} Cookies</h1>
       {/if}
@@ -64,13 +65,6 @@
 </main>
 
 <style>
-  span {
-    position: fixed;
-    left: 5px;
-    top: 5px;
-    text-align: left;
-    color: white;
-  }
   #shop {
     padding-top: 375px;
   }

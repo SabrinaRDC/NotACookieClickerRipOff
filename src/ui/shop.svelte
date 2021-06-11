@@ -1,7 +1,5 @@
 <script lang="ts">
   import { player } from '../db';
-
-  import type PlayerInterface from '../interface/PlayerStat';
   import type {
     GeneratorItem,
     ShopInterface,

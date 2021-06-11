@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type PlayerInterface from './interface/PlayerStat';
-  import { PlayerStore } from './stores/stores';
+  import type PlayerInterface from '../interface/PlayerStat';
+  import { PlayerStore } from '../stores/stores';
   import _ from 'lodash';
-  import { savePlayerStats } from './utils';
+  import { savePlayerStats } from '../utils';
   export let player: PlayerInterface;
   
   const debouncedSavePlayerStats = _.debounce(savePlayerStats, 1000);
@@ -26,8 +26,8 @@
     font-size: 100px;
     font-weight: 100;
     border-radius: 50px;
-	border-width: 10px;
-	border-color: #ff00ff;
-	margin-top: 5px;
+	  border-width: 10px;
+	  border-color: #ff00ff;
+	  margin-top: 5px;
   }
 </style>

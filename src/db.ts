@@ -3,7 +3,7 @@ import type {ShopInterface, UpgradsType, GeneratorType} from "./interface/ShopOb
 import { savePlayerStats, saveShopStatus } from "./utils";
 
 
-const playerDefault: PlayerInterface = Object.freeze({
+export const playerDefault: PlayerInterface = Object.freeze({
     cookies: 0,
     clicked: 0,
     perSecCookie: 0,
@@ -13,7 +13,7 @@ const playerDefault: PlayerInterface = Object.freeze({
     multiplier: 1,
 });
 
-const shopDefault: ShopInterface = Object.freeze({
+export const shopDefault: ShopInterface = Object.freeze({
     upgrades: [
         {
             price: 100,
