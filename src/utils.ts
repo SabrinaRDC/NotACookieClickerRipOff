@@ -28,9 +28,9 @@ export function convertNumber(cookie: number) {
 
 export function savePlayerStats(playSnapshot: PlayerInterface) {
   const playerStatsString = JSON.stringify(playSnapshot);
-  localStorage.setItem('player', playerStatsString);
+  localStorage.setItem('game.player', playerStatsString);
 }
 export function saveShopStatus(shopSnapshot: ShopInterface) {
   const shopStatusString = JSON.stringify(shopSnapshot);
-  localStorage.setItem('shop', shopStatusString)
+  localStorage.setItem('game.shop', shopStatusString)
 }

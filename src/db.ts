@@ -258,8 +258,8 @@ export const shopDefault: ShopInterface = Object.freeze({
     ],
 });
 
-const savedPlayerString = localStorage.getItem('player');
-const savedShopString = localStorage.getItem('shop');
+const savedPlayerString = localStorage.getItem('game.player');
+const savedShopString = localStorage.getItem('game.shop');
 
 const outputPlayer: PlayerInterface = savedPlayerString ? JSON.parse(savedPlayerString) : playerDefault;
 const outputShop: ShopInterface = savedShopString ? JSON.parse(savedShopString) : shopDefault;

@@ -1,7 +1,7 @@
 <script lang="ts">
     function resetGame() {
-        localStorage.removeItem('player');
-        localStorage.removeItem('shop');
+        localStorage.removeItem('game.player');
+        localStorage.removeItem('game.shop');
         location.reload();
     }
 </script>
@@ -13,6 +13,6 @@
      position: fixed;
      color: red;
      left: 5px;
-     top: 67px;
+     top: 92px;
  }
 </style>

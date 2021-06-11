@@ -40,6 +40,7 @@
     {#if localPlayer}
       <SetMulti />
       <ResetGameButton />
+      <span id="click_counter">You clicked {localPlayer.clicked} times.</span>
       {#if localPlayer}
         <h1 id="cookie">{betterCookieCounter} Cookies</h1>
       {/if}
@@ -65,6 +66,13 @@
 </main>
 
 <style>
+  #click_counter {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    text-align: left;
+    color: white;
+  }
   #shop {
     padding-top: 375px;
   }
