@@ -14,7 +14,6 @@
     let betterCookieCounter = '0';
 
     function updatePlayerState(newPlayer: PlayerInterface) {
-        console.log('new update for playerr', newPlayer)
         localPlayer = newPlayer;
         betterCookieCounter = convertNumber(localPlayer.cookies);
     }
@@ -32,7 +31,6 @@
     }
 
     function autoBake() {
-        console.log(localPlayer)
         localPlayer.cookies = localPlayer.cookies + localPlayer.perSecCookie * localPlayer.multiplier;
         PlayerStore.set(localPlayer);
         savePlayerStats(localPlayer);
@@ -53,11 +51,7 @@
         ShopStore.set(Object.assign({}, shopDefault));
     }
 
-    function startAutoBake() {
-    }
-
     let localPlayer: PlayerInterface;
-
     let localShop: ShopInterface;
 
     let playerSub: Unsubscriber;
@@ -78,7 +72,7 @@
     <div id="owo">
         {#if localPlayer}
             <SetMulti />
-            <ResetGameButton on:game.reset={stopAutoBake} on:game.reset.finish={startAutoBake} />
+            <ResetGameButton on:game.reset={stopAutoBake} />
             <span id="click_counter">You clicked {localPlayer.clicked} times.</span>
             {#if localPlayer}
                 <h1 id="cookie">{betterCookieCounter} Cookies</h1>
