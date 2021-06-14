@@ -81,7 +81,7 @@
             {#each shop[catagory] as item}
                 <button class="buyButton" on:click={(e) => buyButtonOnClick(item)}>Buy</button>
 
-                {#if instanceOfUpgrades(item)}
+                {#if isUpgrade(item)}
                     {#if item.type === 'add'}
                         <span class="itemDescription"
                         >+{item.value} to Cookies per click |
