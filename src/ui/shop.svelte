@@ -17,7 +17,7 @@
         return `${firstChar}${restChars}`;
     }
 
-    function instanceOfGenerators(obj: any): obj is GeneratorItem {
+    function isGenerator(obj: any): obj is GeneratorItem {
         return 'perSecCookie' in obj;
     }
 
