@@ -101,7 +101,7 @@
                     {/if}
                 {/if}
 
-                {#if instanceOfGenerators(item)}
+                {#if isGenerator(item)}
                     <span class="itemDescription"
                     >+{convertNumber(item.perSecCookie)} Cookies per second |
                     </span>
