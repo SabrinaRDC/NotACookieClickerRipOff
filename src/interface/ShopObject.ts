@@ -1,36 +1,36 @@
 export interface ShopInterface {
-    generators: GeneratorItem[],
-    upgrades: UpgradeItem[],
+	generators: GeneratorItem[],
+	upgrades: UpgradeItem[],
 }
 
 interface BaseItemInterface {
-    price: number,
-    amount: number,
-    // itemType: GeneratorType | UpgradsType,
+	price: number,
+	amount: number,
+	// itemType: GeneratorType | UpgradsType,
 }
 
 type ShopItemType = {
-    typeName: string;
+	typeName: string;
 }
 
 export interface GeneratorType extends ShopItemType {
-    readonly typeName: 'generator'
+	readonly typeName: 'generator'
 }
 
 export interface UpgradsType extends ShopItemType {
-    readonly typeName: 'upgrads'
+	readonly typeName: 'upgrads'
 }
 
 export interface GeneratorItem extends BaseItemInterface {
-    priceInc: number,
-    perSecCookie: number,
-    // itemType: GeneratorTyp
-    itemType: 'generator',
+	priceInc: number,
+	perSecCookie: number,
+	// itemType: GeneratorTyp
+	itemType: 'generator',
 }
 
 export interface UpgradeItem extends BaseItemInterface {
-    type: 'add' | 'multi' | 'addCPS',
-    value: number,
-    // itemType: UpgradsType,
-    itemType: 'upgrade',
+	type: 'add' | 'multi' | 'addCPS',
+	value: number,
+	// itemType: UpgradsType,
+	itemType: 'upgrade',
 }
