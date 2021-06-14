@@ -107,7 +107,7 @@
                     </span>
                 {/if}
 
-                {#if instanceOfGenerators(item) || instanceOfUpgrades(item)}
+                {#if isGenerator(item) || isUpgrade(item)}
                     <span class="itemDescription"
                     >Price: {convertNumber(item.price)} |
                     </span>
