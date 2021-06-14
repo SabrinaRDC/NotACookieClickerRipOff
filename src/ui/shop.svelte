@@ -27,7 +27,7 @@
 
     function buyButtonOnClick(item: unknown) {
 
-        if(instanceOfUpgrades(item)) {
+        if(isUpgrade(item)) {
             if (player.cookies >= item.price && item.amount === 0) {
                 player.cookies = player.cookies - item.price;
                 item.amount++;
