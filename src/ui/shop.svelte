@@ -21,7 +21,7 @@
         return 'perSecCookie' in obj;
     }
 
-    function instanceOfUpgrades(obj: any): obj is UpgradeItem {
+    function isUpgrade(obj: any): obj is UpgradeItem {
         return 'type' in obj;
     }
 
