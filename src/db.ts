@@ -107,7 +107,21 @@ export const shopDefault: ShopInterface = Object.freeze({
 			itemType: 'upgrade',
 		},
 		{
+			price: 750000000,
+			type: 'multi',
+			value: 2,
+			amount: 0,
+			itemType: 'upgrade',
+		},
+		{
 			price: 1000000000,
+			type: 'multi',
+			value: 2,
+			amount: 0,
+			itemType: 'upgrade',
+		},
+		{
+			price: 2500000000,
 			type: 'multi',
 			value: 2,
 			amount: 0,
