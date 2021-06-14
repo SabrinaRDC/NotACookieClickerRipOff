@@ -24,7 +24,7 @@ export function convertNumber(cookie: number) {
     if (cookie >= 1000000) return String(Math.round(cookie / 10000) / 100 + 'Mil');
     if (cookie >= 1000) return String(Math.round(cookie / 10) / 100 + 'k');
     if (cookie < 1000) return String(Math.round(cookie * 10) / 10);
-  }
+}
 
 export function savePlayerStats(playSnapshot: PlayerInterface) {
   const playerStatsString = JSON.stringify(playSnapshot);
