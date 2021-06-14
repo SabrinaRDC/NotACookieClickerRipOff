@@ -50,7 +50,7 @@
             }
         }
 
-        if(instanceOfGenerators(item)) {
+        if(isGenerator(item)) {
             if (player.cookies >= item.price) {
                 player.cookies = player.cookies - item.price;
                 item.amount++;
