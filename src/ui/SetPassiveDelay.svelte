@@ -12,6 +12,7 @@
 	function setDelay() {
 		if (setDelayInput.valueAsNumber <= 0) {
 			player.autoBakeDelay = 1;
+			setDelayInput.valueAsNumber = 1;
 		} else {
 			player.autoBakeDelay = setDelayInput.valueAsNumber;
 		}
