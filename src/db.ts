@@ -10,7 +10,8 @@ export const playerDefault: PlayerInterface = Object.freeze({
 	clickAddon: 0,
 	clickCPS: 0,
 	multiplier: 1,
-	autoBakeDelay: 1000
+	autoBakeDelay: 1000,
+	saveVersion: '0.2.0',
 });
 
 export const shopDefault: ShopInterface = Object.freeze({
@@ -280,3 +281,10 @@ const outputShop: ShopInterface = savedShopString ? JSON.parse(savedShopString) 
 
 export const player = Object.assign({}, outputPlayer);
 export const shop = Object.assign({}, outputShop);
+
+async function requestPerson(url: string) {
+	const fetched = await fetch(url);
+	const parsedFetch = await fetched.json();
+	console.log(parsedFetch.results[0].name.first, parsedFetch.results[0].name.last, 'is a bitch');
+}
+requestPerson('https://randomuser.me/api/')

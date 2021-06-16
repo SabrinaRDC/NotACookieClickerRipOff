@@ -6,5 +6,6 @@ export default interface PlayerInterface {
 	clickAddon: number,
 	clickCPS: number,
 	multiplier: number,
-	autoBakeDelay: number
+	autoBakeDelay: number,
+	saveVersion: string,
 }
