@@ -1,6 +1,5 @@
 import type PlayerInterface from "./interface/PlayerStat";
-import type { ShopInterface, UpgradsType, GeneratorType } from "./interface/ShopObject";
-import { savePlayerStats, saveShopStatus } from "./utils";
+import type { ShopInterface } from "./interface/ShopObject";
 
 
 export const playerDefault: PlayerInterface = Object.freeze({
@@ -11,6 +10,7 @@ export const playerDefault: PlayerInterface = Object.freeze({
 	clickAddon: 0,
 	clickCPS: 0,
 	multiplier: 1,
+	autoBakeDelay: 1000
 });
 
 export const shopDefault: ShopInterface = Object.freeze({

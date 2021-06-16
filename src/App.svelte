@@ -8,67 +8,42 @@
 	import { convertNumber, savePlayerStats } from "./utils";
 	import { player, playerDefault, shopDefault } from "./db";
 	import ResetGameButton from "./ui/ResetGameButton.svelte";
-	import type { Unsubscriber } from "svelte/store";
+import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 
-	const AUTO_BAKE_TIME = 1000;
+	let enableAutoBake = true;
 	let betterCookieCounter = "0";
+	let betterPerSecCounter = "0";
+	let betterPerClickCounter = "1";
+
+	let localPlayer: PlayerInterface;
+	let localShop: ShopInterface;
+
+	ShopStore.subscribe((newShop) => (localShop = newShop));
+	PlayerStore.subscribe((newPlayer) => updatePlayerState(newPlayer));
 
 	function updatePlayerState(newPlayer: PlayerInterface) {
 		localPlayer = newPlayer;
 		betterCookieCounter = convertNumber(localPlayer.cookies);
-	}
-
-	function createNewShopSubscription() {
-		return ShopStore.subscribe((newShop) => (localShop = newShop));
-	}
-
-	function createNewPlayerubscription() {
-		return PlayerStore.subscribe((newPlayer) =>
-			updatePlayerState(newPlayer)
-		);
-	}
-
-	function createNewAutoBakeJob() {
-		return setInterval(autoBake, AUTO_BAKE_TIME);
+		betterPerSecCounter = convertNumber(localPlayer.perSecCookie*localPlayer.multiplier);
+		betterPerClickCounter = convertNumber((localPlayer.perClickCookie + localPlayer.clickAddon)*localPlayer.multiplier)
 	}
 
 	function autoBake() {
+		if (!enableAutoBake) return;
 		localPlayer.cookies =
 			localPlayer.cookies +
 			localPlayer.perSecCookie * localPlayer.multiplier;
 		PlayerStore.set(localPlayer);
 		savePlayerStats(localPlayer);
+		setTimeout(() => autoBake(), player.autoBakeDelay);
 	}
 
-	function cookiesPerSec() {
-		return (
-			Math.round(
-				localPlayer.perSecCookie * localPlayer.multiplier * 1000
-			) / 1000
-		);
-	}
+	autoBake();
 
-	function cookiesPerClick() {
-		const totalCookies =
-			localPlayer.perClickCookie + localPlayer.clickAddon;
-		return Math.round(totalCookies * localPlayer.multiplier * 1000) / 1000;
-	}
-
-	function stopAutoBake() {
+	function resetGame() {
 		PlayerStore.set(Object.assign({}, playerDefault));
 		ShopStore.set(Object.assign({}, shopDefault));
 	}
-
-	let localPlayer: PlayerInterface;
-	let localShop: ShopInterface;
-
-	let playerSub: Unsubscriber;
-	let shopSub: Unsubscriber;
-	let autoBakeJob: any;
-
-	playerSub = createNewPlayerubscription();
-	shopSub = createNewShopSubscription();
-	autoBakeJob = createNewAutoBakeJob();
 </script>
 
 <svelte:head>
@@ -78,7 +53,8 @@
 	<div id="owo">
 		{#if localPlayer}
 			<SetMulti />
-			<ResetGameButton on:game.reset={stopAutoBake} />
+			<SetPassiveDelay />
+			<ResetGameButton on:game.reset={resetGame} />
 			<span id="click_counter"
 				>You clicked {localPlayer.clicked} times.</span
 			>
@@ -86,10 +62,10 @@
 				<h1 id="cookie">{betterCookieCounter} Cookies</h1>
 			{/if}
 			<h2>
-				{cookiesPerSec()} Cookies per second
+				{betterPerSecCounter} Cookies per second
 			</h2>
 			<h2>
-				{cookiesPerClick()} Cookies per Click
+				{betterPerClickCounter} Cookies per Click
 			</h2>
 			<CookieButton player={localPlayer} />
 		{/if}
