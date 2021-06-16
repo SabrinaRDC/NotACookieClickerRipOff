@@ -55,6 +55,7 @@ import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 			<SetMulti />
 			<SetPassiveDelay />
 			<ResetGameButton on:game.reset={resetGame} />
+			<span id="update_message">Reset game if new features doesn't work.</span>
 			<span id="click_counter"
 				>You clicked {localPlayer.clicked} times.</span
 			>
@@ -78,6 +79,12 @@ import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 </main>
 
 <style>
+	#update_message {
+		text-align: center;
+		color:white;
+		position: fixed;
+		left: 37.5%;
+	}
 	#click_counter {
 		position: fixed;
 		top: 5px;
