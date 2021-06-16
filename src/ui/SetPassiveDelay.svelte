@@ -34,12 +34,12 @@
 		width: 50px;
 		position: fixed;
 		left: 70px;
-		top: 118px;
+		top: 108px;
 	}
 	#setMulti {
 		position: fixed;
 		left: 5px;
-		top: 118px;
+		top: 108px;
 		width: 50px;
 	}
 	span {

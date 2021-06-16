@@ -29,12 +29,12 @@
 		width: 50px;
 		position: fixed;
 		left: 70px;
-		top: 65px;
+		top: 55px;
 	}
 	#setMulti {
 		position: fixed;
 		left: 5px;
-		top: 65px;
+		top: 55px;
 		width: 50px;
 	}
 	span {

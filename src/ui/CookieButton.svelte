@@ -30,6 +30,6 @@
 		border-radius: 50px;
 		border-width: 10px;
 		border-color: #ff00ff;
-		margin-top: 5px;
+		margin-top: 15px;
 	}
 </style>
