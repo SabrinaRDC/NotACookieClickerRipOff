@@ -52,6 +52,7 @@ import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 <main>
 	<div id="owo">
 		{#if localPlayer}
+			<a href="https://sabrina-rdc.com/" id="home_link">Home</a>
 			<SetMulti />
 			<SetPassiveDelay />
 			<ResetGameButton on:game.reset={resetGame} />
@@ -79,6 +80,13 @@ import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 </main>
 
 <style>
+	#home_link {
+		position: fixed;
+		right: 10px;
+		top: 5px;
+		color: white;
+		text-align: center;
+	}
 	#update_message {
 		text-align: center;
 		color:white;
@@ -93,7 +101,7 @@ import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 		color: white;
 	}
 	#shop {
-		padding-top: 375px;
+		padding-top: 285px;
 	}
 	#owo {
 		position: fixed;
