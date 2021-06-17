@@ -281,10 +281,3 @@ const outputShop: ShopInterface = savedShopString ? JSON.parse(savedShopString) 
 
 export const player = Object.assign({}, outputPlayer);
 export const shop = Object.assign({}, outputShop);
-
-async function requestPerson(url: string) {
-	const fetched = await fetch(url);
-	const parsedFetch = await fetched.json();
-	console.log(parsedFetch.results[0].name.first, parsedFetch.results[0].name.last, 'is a bitch');
-}
-requestPerson('https://randomuser.me/api/')
