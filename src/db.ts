@@ -273,11 +273,16 @@ export const shopDefault: ShopInterface = Object.freeze({
 	],
 });
 
-const savedPlayerString = localStorage.getItem('game.player');
-const savedShopString = localStorage.getItem('game.shop');
+export enum LocalStorageKeys {
+	player = 'game.player',
+	shop = 'game.shop',
+}
+
+const savedPlayerString = localStorage.getItem(LocalStorageKeys.player);
+const savedShopString = localStorage.getItem(LocalStorageKeys.shop);
 
 const outputPlayer: PlayerInterface = savedPlayerString ? JSON.parse(savedPlayerString) : playerDefault;
 const outputShop: ShopInterface = savedShopString ? JSON.parse(savedShopString) : shopDefault;
 
-export const player = Object.assign({}, outputPlayer);
-export const shop = Object.assign({}, outputShop);
+export const player = Object.assign({}, { ...playerDefault, ...outputPlayer });
+export const shop = Object.assign({}, { ...shopDefault, ...outputShop });

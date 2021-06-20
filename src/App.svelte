@@ -6,9 +6,10 @@
 	import type { ShopInterface } from "./interface/ShopObject";
 	import SetMulti from "./ui/SetMulti.svelte";
 	import { convertNumber, savePlayerStats } from "./utils";
-	import { player, playerDefault, shopDefault } from "./db";
+	import { LocalStorageKeys, player, playerDefault, shopDefault } from "./db";
 	import ResetGameButton from "./ui/ResetGameButton.svelte";
-import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
+	import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
+	import SaveImportExport from "./ui/SaveImportExport.svelte"
 
 	let enableAutoBake = true;
 	let betterCookieCounter = "0";
@@ -44,6 +45,8 @@ import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 		PlayerStore.set(Object.assign({}, playerDefault));
 		ShopStore.set(Object.assign({}, shopDefault));
 	}
+
+	localStorage.setItem(LocalStorageKeys.shop, JSON.stringify(localShop));
 </script>
 
 <svelte:head>
@@ -53,10 +56,11 @@ import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 	<div id="owo">
 		{#if localPlayer}
 			<a href="https://sabrina-rdc.com/" id="home_link">Home</a>
+			<SaveImportExport />
 			<SetMulti />
 			<SetPassiveDelay />
 			<ResetGameButton on:game.reset={resetGame} />
-			<span id="update_message">Reset game if new features doesn't work.</span>
+			<!-- <span id="update_message">Reset game if new features doesn't work.</span> -->
 			<span id="click_counter"
 				>You clicked {localPlayer.clicked} times.</span
 			>
@@ -74,7 +78,7 @@ import SetPassiveDelay from "./ui/SetPassiveDelay.svelte";
 	</div>
 	<div id="shop">
 		{#if localShop}
-			<ShopList shop={localShop} />
+			<ShopList shop={localShop} player={localPlayer} />
 		{/if}
 	</div>
 </main>

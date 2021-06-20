@@ -1,5 +1,6 @@
 <script lang="typescript">
-	import { player } from "../db";
+	import type PlayerInterface from "../interface/PlayerStat";
+
 	import type {
 		GeneratorItem,
 		ShopInterface,
@@ -8,6 +9,7 @@
 	import { PlayerStore, ShopStore } from "../stores/stores";
 	import { convertNumber, saveShopStatus } from "../utils";
 
+	export let player: PlayerInterface;
 	export let shop: ShopInterface;
 	const shopCatagories = Object.keys(shop);
 
@@ -33,18 +35,14 @@
 				switch (item.type) {
 					case "add":
 						player.perClickCookie =
-							player.perClickCookie +
-							item.value;
+							player.perClickCookie + item.value;
 						break;
 					case "multi":
 						player.perClickCookie =
-							player.perClickCookie *
-							item.value;
+							player.perClickCookie * item.value;
 						break;
 					case "addCPS":
-						player.clickCPS =
-							player.clickCPS +
-							item.value;
+						player.clickCPS = player.clickCPS + item.value;
 						updateClickAddon();
 						break;
 				}
@@ -59,11 +57,8 @@
 			if (player.cookies >= item.price) {
 				player.cookies = player.cookies - item.price;
 				item.amount++;
-				player.perSecCookie =
-					player.perSecCookie + item.perSecCookie;
-				item.price = Math.floor(
-					item.price * item.priceInc
-				);
+				player.perSecCookie = player.perSecCookie + item.perSecCookie;
+				item.price = Math.floor(item.price * item.priceInc);
 				ShopStore.set(shop);
 				PlayerStore.set(player);
 				updateClickAddon();
@@ -87,50 +82,40 @@
 			{#each shop[catagory] as item}
 				<button
 					class="buyButton"
-					on:click={(e) => buyButtonOnClick(item)}
-					>Buy</button
+					on:click={(e) => buyButtonOnClick(item)}>Buy</button
 				>
 
 				{#if isUpgrade(item)}
 					{#if item.type === "add"}
 						<span class="itemDescription"
-							>+{item.value} to Cookies
-							per click |
+							>+{item.value} to Cookies per click |
 						</span>
 					{/if}
 
 					{#if item.type === "multi"}
 						<span class="itemDescription"
-							>x{item.value} Cookies per
-							click |
+							>x{item.value} Cookies per click |
 						</span>
 					{/if}
 
 					{#if item.type === "addCPS"}
 						<span class="itemDescription"
-							>+{item.value} of CPS to
-							Cookies per click |
+							>+{item.value} of CPS to Cookies per click |
 						</span>
 					{/if}
 				{/if}
 
 				{#if isGenerator(item)}
 					<span class="itemDescription"
-						>+{convertNumber(
-							item.perSecCookie
-						)} Cookies per second |
+						>+{convertNumber(item.perSecCookie)} Cookies per second |
 					</span>
 				{/if}
 
 				{#if isGenerator(item) || isUpgrade(item)}
 					<span class="itemDescription"
-						>Price: {convertNumber(
-							item.price
-						)} |
+						>Price: {convertNumber(item.price)} |
 					</span>
-					<span class="itemDescription"
-						>Amount: {item.amount}</span
-					>
+					<span class="itemDescription">Amount: {item.amount}</span>
 				{/if}
 
 				<br />
